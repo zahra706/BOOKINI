@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contactez-nous{% endblock %}
+
+{% block body %}
+    <style>
+        .contact {
+            max-width: 700px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .contact h1 {
+            color:rgb(245, 165, 27);
+            font-size: 2.2em;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .contact p {
+            font-size: 1.1em;
+            text-align: center;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .contact form div {
+            margin-bottom: 20px;
+        }
+
+        .contact label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .contact input,
+        .contact textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact input:focus,
+        .contact textarea:focus {
+            border-color: rgb(245, 165, 27);
+            outline: none;
+        }
+
+        .contact textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact button {
+            background-color: rgb(245, 165, 27);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact button:hover {
+            background-color: rgb(245, 165, 27);
+        }
+    </style>
+
+    <div class="contact">
+        <h1>Contactez-nous</h1>
+        <p>Nous serions heureux de recevoir vos questions, suggestions ou commentaires.</p>
+        
+        <form action="#" method="post">
+            <div>
+                <label for="name">Nom</label>
+                <input type="text" id="name" name="name" required />
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required />
+            </div>
+            <div>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+{% endblock %}

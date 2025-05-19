@@ -1,0 +1,32 @@
+{% block body %}
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="{{ path('livre_index') }}" alt="Logo" style="color:rgb(245, 165, 27); font-weight:bolder;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeYZOS6s9mhR43Nm28psii4c_4weUDrstABg&s" class="image-rounded" > BOOKINI </a>
+        </div>
+        <ul class="menu">
+            <li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('livre_index') }}">Accueil</a>
+                {% else %}
+                    <a href="{{ path('user_livre_list') }}">Accueil</a>
+                {% endif %}
+            </li>
+            <li><a href="{{ path('about') }}">À propos</a></li>
+            <li><a href="{{ path('contact') }}">Contact</a></li>
+        
+            {% if app.user %}
+                <li>
+                    <a href="{{ path('app_logout') }}" class="btn-ajouter" style="text-align: right; margin-bottom: 1rem;background-color: #e74c3c;">
+                        Déconnexion
+                    </a>
+                </li>
+            {% else %}
+                <li><a href="{{ path('app_login') }}">Connexion</a></li>
+            {% endif %}
+        </ul>
+        
+        
+    </nav>
+</header>
+{% endblock %}

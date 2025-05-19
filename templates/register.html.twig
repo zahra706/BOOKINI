@@ -1,0 +1,205 @@
+{% block title %}{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .form-row.roles {
+        position: relative;
+        margin-bottom: 25px;
+    }
+    
+    .form-row.roles select {
+        width: 100%;
+        padding: 14px 12px 14px 42px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        appearance: none;
+        background-color: #fff;
+        background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 16px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    
+    .form-row.roles select:focus {
+        border-color: #4a90e2;
+        box-shadow: 0 0 6px rgba(74, 144, 226, 0.3);
+        outline: none;
+    }
+    
+    .form-row.roles::before {
+        content: '';
+        position: absolute;
+        top: 38px;
+        left: 12px;
+        width: 20px;
+        height: 20px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        opacity: 0.5;
+        background-image: url("data:image/svg+xml;utf8,<svg fill='gray' xmlns='http://www.w3.org/2000/svg' height='20' viewBox='0 0 24 24' width='20'><path d='M0 0h24v24H0z' fill='none'/><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>");
+    }
+    
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #eef2f7;
+        margin: 0;
+        padding: 0;
+    }
+    .form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form-row label {
+    font-size: 14px;
+    color: #444;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.form-row input,
+.form-row select {
+    padding: 10px 14px;
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: #fff;
+}
+
+.form-row input:focus,
+.form-row select:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 4px rgba(74, 144, 226, 0.3);
+    outline: none;
+}
+
+    
+    /* Icône spécifique pour email */
+    .form-row.email::before {
+        background-image: url('data:image/svg+xml;utf8,<svg fill="gray" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>');
+    }
+    
+    /* Icône spécifique pour mot de passe */
+    .form-row.password::before {
+        background-image: url('data:image/svg+xml;utf8,<svg fill="gray" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 17a2 2 0 100-4 2 2 0 000 4zm6-9h-1V6a5 5 0 00-10 0v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6-5a3 3 0 013 3v2H9V6a3 3 0 013-3z"/></svg>');
+    }
+    
+
+    .register-container {
+        max-width: 480px;
+        margin: 70px auto;
+        padding: 40px 30px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 28px;
+        color: #2c3e50;
+        margin-bottom: 25px;
+    }
+
+    label {
+        font-weight: 600;
+        color: #34495e;
+    }
+
+    
+
+    input[type="email"],
+    input[type="password"],
+    select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus,
+    select:focus {
+        border-color: #4a90e2;
+        box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+        outline: none;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+        padding: 14px;
+        background-color: #4a90e2;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #357ab8;
+        transform: scale(1.02);
+    }
+
+    .error {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #ffe0e0;
+        color: #a94442;
+        border: 1px solid #f5c6cb;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    .login-link {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+        color: #666;
+    }
+
+    .login-link a {
+        color: #4a90e2;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s ease;
+    }
+
+    .login-link a:hover {
+        color: #2d6cbf;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="register-container">
+    <h1>Créer un compte</h1>
+
+    {{ form_start(form) }}
+        <div class="form-row email">
+            {{ form_row(form.email) }}
+        </div>
+
+        
+
+        <div class="form-row password">
+            {{ form_row(form.password) }}
+        </div>
+        <div class="form-row">
+            {{ form_row(form.roles) }}
+        </div>
+
+        <button type="submit">S'inscrire</button>
+    {{ form_end(form) }}
+
+    <div class="login-link">
+        Vous avez déjà un compte ? <a href="{{ path('app_login') }}">Connectez-vous ici</a>.
+    </div>
+</div>
+{% endblock %}

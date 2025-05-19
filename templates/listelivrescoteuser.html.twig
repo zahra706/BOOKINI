@@ -1,0 +1,327 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes livres{% endblock %}
+
+{% block stylesheets %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f2f5;
+        margin: 0;
+        padding: 0;
+    }
+    .navbar {
+        display: flex;
+        justify-content: space-between; /* Espacement entre logo et menu */
+        align-items: center;
+        background-color: #343a40; /* Couleur sombre pour la navbar */
+        padding: 15px 30px; /* Padding pour espacer les éléments */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+        border-radius: 8px; /* Coins arrondis */
+        transition: box-shadow 0.3s ease, background-color 0.3s ease; /* Transition fluide */
+      }
+      
+      .navbar:hover {
+        background-color: #495057; /* Couleur de fond plus claire au survol */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
+      }
+      
+      /* Logo */
+      .navbar .logo a {
+        font-size: 1.6rem;
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease; /* Transition fluide pour la couleur */
+      }
+      
+      .navbar .logo a:hover {
+        color: #f8f9fa; /* Couleur plus claire au survol */
+      }
+      
+      /* Menu */
+      .menu {
+        list-style: none; /* Supprimer les puces */
+        padding: 0;
+        margin: 0;
+        display: flex; /* Menu en ligne */
+        gap: 30px; /* Espacement entre les éléments */
+      }
+      
+      .menu li {
+        display: inline-block;
+      }
+      
+      .menu a {
+        color: white;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 5px 15px;
+        border-radius: 4px; /* Coins arrondis pour les liens */
+        transition: background-color 0.3s ease, color 0.3s ease; /* Animation fluide */
+      }
+      
+      .menu a:hover {
+        background-color: #007bff; /* Couleur de fond au survol */
+        color: #fff; /* Couleur du texte au survol */
+      }
+      
+      /* Réduire la navbar en mobile */
+      @media (max-width: 768px) {
+        .navbar {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      
+        .menu {
+          display: none; /* Cacher le menu sur mobile */
+          flex-direction: column;
+          width: 100%;
+        }
+      
+        .menu.active {
+          display: flex; /* Afficher le menu si la classe active est ajoutée */
+        }
+      
+        .menu a {
+          padding: 10px 0;
+          text-align: left;
+          width: 100%;
+        }
+      
+        .navbar .logo a {
+          font-size: 1.4rem; /* Réduire la taille du logo sur mobile */
+        }
+      }
+      
+      /* Menu burger */
+      .navbar .navbar-toggler {
+        background: none;
+        border: none;
+        display: block;
+        cursor: pointer;
+      }
+      
+      .navbar .navbar-toggler span {
+        background-color: white;
+        width: 25px;
+        height: 3px;
+        display: block;
+        margin: 5px 0;
+        transition: all 0.3s ease;
+      }
+      
+      /* Animation du menu burger (rotation) */
+      .navbar .navbar-toggler.active span:nth-child(1) {
+        transform: rotate(45deg);
+        transform-origin: 0 0;
+      }
+      
+      .navbar .navbar-toggler.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .navbar .navbar-toggler.active span:nth-child(3) {
+        transform: rotate(-45deg);
+        transform-origin: 0 100%;
+      }
+      /* Style global du footer */
+.footer {
+background-color: #343a40; /* Fond sombre pour le footer */
+color: #ffffff; /* Couleur du texte */
+padding: 20px 30px;
+text-align: center;
+box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+border-top: 2px solid #007bff; /* Bordure en haut avec une couleur bleue */
+font-size: 0.9rem;
+margin-top: 30px;
+transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Effet au survol du footer */
+.footer:hover {
+background-color: #495057; /* Couleur plus claire au survol */
+color: #f8f9fa; /* Texte plus clair au survol */
+}
+
+/* Style des icônes sociales */
+.social-icons {
+list-style: none;
+padding: 0;
+margin: 15px 0 0;
+display: flex;
+justify-content: center; /* Centrer les icônes */
+gap: 20px; /* Espacement entre les icônes */
+}
+
+.social-icons li {
+display: inline-block;
+}
+
+.social-icons a {
+text-decoration: none;
+color: #ffffff; /* Couleur des icônes */
+font-size: 1.5rem; /* Taille des icônes */
+transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Effet au survol des icônes sociales */
+.social-icons a:hover {
+color: #007bff; /* Couleur bleue au survol */
+transform: translateY(-5px); /* Effet de déplacement au survol */
+}
+
+/* Ajouter les icônes FontAwesome (si tu les utilises) */
+.social-icons i {
+margin-right: 8px;
+font-size: 1.3rem; /* Ajuster la taille des icônes */
+}
+.image-rounded {
+  width: 60px; /* Redimensionne l'image */
+  height: auto; /* Garde le ratio de l'image */
+  border-radius: 15px; /* Coins arrondis */
+  border: 3px solid #ccc; /* Bordure grise */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+.image-rounded-icon {
+  width: 50px; /* Redimensionne l'image */
+  height: auto; /* Garde le ratio de l'image */
+  border-radius: 50px; /* Coins arrondis */
+  border: 3px solid #ccc; /* Bordure grise */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+    .container {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+        font-size: 28px;
+        color: #333;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .livre-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f9f9f9;
+        padding: 16px 20px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        transition: box-shadow 0.2s ease;
+    }
+
+    .livre-card:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    .livre-titre {
+        font-size: 18px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .actions a {
+        margin-left: 10px;
+        text-decoration: none;
+        background-color: #4a90e2;
+        color: #fff;
+        padding: 8px 14px;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+    }
+
+    .actions a:hover {
+        background-color: #357ab8;
+    }
+
+    .no-book {
+        text-align: center;
+        font-size: 18px;
+        color: #888;
+        margin-top: 40px;
+    }
+    .bienvenue-section {
+        background-color: #f3f3f3;
+        padding: 30px;
+        border-radius: 10px;
+        margin-bottom: 32px;
+        margin-top:50px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    
+    .bienvenue-section h1 {
+        color: #333;
+        margin-bottom: 10px;
+    }
+    
+    .bienvenue-section p {
+        font-size: 1.1em;
+        color: #555;
+    }
+    .actions .action-btn {
+        text-decoration: none;
+        padding: 6px 12px;
+        border-radius: 5px;
+        margin-right: 5px;
+        color: white;
+        font-weight: bold;
+        display: inline-block;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    
+    .actions .yellow {
+        background-color:rgb(210, 173, 21);
+    }
+    
+    .actions .green {
+        background-color: rgb(47, 155, 23);
+    }
+    
+    
+    .actions .yellow:hover {
+        transform: scale(1.1);
+        background-color:rgb(227, 193, 23); /* légèrement plus foncé pour effet visuel */
+    }
+    .actions .green:hover {
+        transform: scale(1.1);
+        background-color:rgb(36, 193, 36); /* vert un peu plus profond */
+    }
+    
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="bienvenue-section">
+    <h1> Bonjour, {{ app.user.email }} Bienvenue en <strong style="color:rgb(245, 165, 27);">BOOKINI</strong> !</h1>
+    <p> Bienvenue sur notre plateforme intelligente de recommandation de livres !  Explorez des ouvrages adaptés à vos goûts et découvrez des nouveautés littéraires chaque jour. 📚</p>
+</div>
+<div class="container">
+    <h1>Liste des livres</h1>
+
+    {% if livres is not empty %}
+        {% for livre in livres %}
+            <div class="livre-card">
+                <div class="livre-titre">{{ livre.titre }}</div>
+                <div class="actions">
+                    <a href="{{ path('livre_show', {'id': livre.id}) }}" class="action-btn yellow">Voir les Avis</a>
+                    <a href="{{ path('livre_comment', {'id': livre.id}) }}" class="action-btn yellow">Commentaires</a>
+                    <a href="{{ path('livre_summary', {'id': livre.id}) }}" class="action-btn green">Résumé</a>
+                </div>
+                
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="no-book">Aucun livre trouvé.</p>
+    {% endif %}
+</div>
+{% endblock %}

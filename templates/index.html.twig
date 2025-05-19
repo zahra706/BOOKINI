@@ -1,0 +1,176 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des livres{% endblock %}
+
+{% block body %}
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            padding: 2rem;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: #2c3e50;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        .btn-ajouter {
+            display: inline-block;
+            margin-bottom: 1rem;
+            background-color: #3498db;
+            color: white;
+            padding: 0.6rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-ajouter:hover {
+            background-color: #2980b9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f1f1f1;
+            font-weight: bold;
+            color: #555;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        td:last-child a {
+            margin-right: 0.5rem;
+            font-size: 0.9rem;
+            color: #555;
+            background: #e9ecef;
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        td:last-child a:hover {
+            background: #ced4da;
+            color: #000;
+        }
+        .bienvenue-section {
+            background-color: #f3f3f3;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 32px;
+            margin-top:50px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .bienvenue-section h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .bienvenue-section p {
+            font-size: 1.1em;
+            color: #555;
+        }
+        /* Style par défaut */
+a.action-edit,
+a.action-delete,
+a.action-analyse {
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Couleurs au survol */
+a.action-edit:hover {
+    background-color: #f1c40f; /* Jaune */
+    color: white;
+}
+
+a.action-delete:hover {
+    background-color: #e74c3c; /* Rouge */
+    color: white;
+}
+
+a.action-analyse:hover {
+    background-color: #3498db; /* Bleu */
+    color: white;
+}
+
+    </style>
+    <div class="bienvenue-section">
+        <h1> Bonjour, {{ app.user.email }} Bienvenue en <strong style="color:rgb(245, 165, 27);">BOOKINI</strong> !</h1>
+        <p> Bienvenue sur notre plateforme intelligente de recommandation de livres !  Explorez des ouvrages adaptés à vos goûts et découvrez des nouveautés littéraires chaque jour. 📚</p>
+    </div>
+    
+    
+    
+    <h1>Liste des livres</h1>
+
+    <a href="{{ path('livre_new') }}" class="btn-ajouter">Ajouter un nouveau livre</a>
+
+    <table>
+        <tr>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Genre</th>
+            <th>Date de publication</th>
+            <th>Actions</th>
+        </tr>
+        {% for livre in livres %}
+            <tr>
+                <td>{{ livre.titre }}</td>
+                <td>{{ livre.auteur }}</td>
+                <td>{{ livre.genre }}</td>
+                <td>{{ livre.datePublication|date('Y-m-d') }}</td>
+                <td>
+                    <a href="{{ path('livre_edit', {'id': livre.id}) }}"
+                       style="text-decoration: none; padding: 6px 10px; border-radius: 5px; margin-right: 5px; background-color: #f1c40f; color: white;">
+                    Modifier
+                    </a>
+                
+                    <a href="{{ path('livre_delete', {'id': livre.id}) }}"
+                       style="text-decoration: none; padding: 6px 10px; border-radius: 5px; margin-right: 5px; background-color: #e74c3c; color: white;">
+                        Supprimer
+                    </a>
+                
+                    <a href="{{ path('livre_analyse', {'id': livre.id}) }}"
+                       style="text-decoration: none; padding: 6px 10px; border-radius: 5px; background-color: #3498db; color: white;">
+                     Analyser
+                    </a>
+                </td>
+                
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
